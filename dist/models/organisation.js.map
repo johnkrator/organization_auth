@@ -1,0 +1,1 @@
+{"version":3,"file":"organisation.js","sourceRoot":"","sources":["../../src/models/organisation.ts"],"names":[],"mappings":";;AAMA,MAAM,YAAY;IAKd,YAAY,UAAkC;QAC1C,IAAI,CAAC,KAAK,GAAG,UAAU,CAAC,KAAK,CAAC;QAC9B,IAAI,CAAC,IAAI,GAAG,UAAU,CAAC,IAAI,CAAC;QAC5B,IAAI,CAAC,WAAW,GAAG,UAAU,CAAC,WAAW,CAAC;IAC9C,CAAC;CACJ;AAED,kBAAe,YAAY,CAAC"}
