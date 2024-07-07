@@ -12,7 +12,7 @@ const user_1 = __importDefault(require("./models/user"));
 const organisation_1 = __importDefault(require("./models/organisation"));
 const errorMiddleware_1 = require("./middleware/errorMiddleware");
 const app = (0, express_1.default)();
-app.get("/api/test", (_req, res) => {
+app.get("/", (_req, res) => {
     res.send("Hello World");
 });
 app.use(express_1.default.json());
