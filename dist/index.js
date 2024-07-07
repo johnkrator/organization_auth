@@ -27,8 +27,8 @@ db_1.sequelize.sync()
     console.log("Database & tables created!");
 })
     .catch((error) => console.error("Unable to sync database:", error));
-app.use("/v1/auth", auth_routes_1.default);
-app.use("/v1/api", api_routes_1.default);
+app.use("/auth", auth_routes_1.default);
+app.use("/api", api_routes_1.default);
 const port = process.env.PORT;
 db_1.dbConnected
     .then(() => {
