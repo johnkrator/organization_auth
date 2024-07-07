@@ -9,7 +9,7 @@ import {generalErrorHandler, notFoundErrorHandler} from "./middleware/errorMiddl
 
 const app: Application = express();
 
-app.get("/api/test", (_req, res) => {
+app.get("/", (_req, res) => {
     res.send("Hello World");
 });
 
