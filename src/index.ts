@@ -28,8 +28,8 @@ sequelize.sync()
     })
     .catch((error) => console.error("Unable to sync database:", error));
 
-app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/api", apiRoutes);
+app.use("/v1/auth", authRoutes);
+app.use("/v1/api", apiRoutes);
 
 const port = process.env.PORT;
 
