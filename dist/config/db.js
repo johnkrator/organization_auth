@@ -12,12 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dbConnected = exports.pool = void 0;
+exports.dbConnected = exports.sequelize = exports.pool = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const pg_1 = require("pg");
+const sequelize_1 = require("sequelize");
 dotenv_1.default.config();
 const adminPool = new pg_1.Pool({
-    connectionString: process.env.POSTGRES_URL, // URL for connecting to PostgreSQL server
+    connectionString: process.env.POSTGRES_URL,
 });
 const databaseName = new URL(process.env.POSTGRES_URL).pathname.split("/")[1];
 const createDatabaseIfNotExists = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -45,11 +46,14 @@ const createDatabaseIfNotExists = () => __awaiter(void 0, void 0, void 0, functi
 exports.pool = new pg_1.Pool({
     connectionString: process.env.POSTGRES_URL,
 });
+exports.sequelize = new sequelize_1.Sequelize(process.env.POSTGRES_URL, {
+    dialect: "postgres",
+    logging: false,
+});
 exports.dbConnected = new Promise((resolve, reject) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield createDatabaseIfNotExists();
-        const client = yield exports.pool.connect();
-        client.release();
+        yield exports.sequelize.authenticate();
         console.log("Connected to database");
         resolve();
     }
@@ -58,4 +62,51 @@ exports.dbConnected = new Promise((resolve, reject) => __awaiter(void 0, void 0,
         reject(error);
     }
 }));
+// import dotenv from "dotenv";
+// import {Pool} from "pg";
+//
+// dotenv.config();
+//
+// const adminPool = new Pool({
+//     connectionString: process.env.POSTGRES_URL, // URL for connecting to PostgreSQL server
+// });
+//
+// const databaseName = new URL(process.env.POSTGRES_URL).pathname.split("/")[1];
+//
+// const createDatabaseIfNotExists = async () => {
+//     const client = await adminPool.connect();
+//     try {
+//         const result = await client.query(`SELECT 1
+//                                            FROM pg_database
+//                                            WHERE datname = '${databaseName}'`);
+//         if (result.rowCount === 0) {
+//             await client.query(`CREATE DATABASE ${databaseName}`);
+//             console.log(`Database ${databaseName} created successfully`);
+//         } else {
+//             console.log(`Database ${databaseName} already exists`);
+//         }
+//     } catch (error) {
+//         console.error("Error checking/creating database:", error);
+//         throw error;
+//     } finally {
+//         client.release();
+//     }
+// };
+//
+// export const pool = new Pool({
+//     connectionString: process.env.POSTGRES_URL,
+// });
+//
+// export const dbConnected = new Promise<void>(async (resolve, reject) => {
+//     try {
+//         await createDatabaseIfNotExists();
+//         const client = await pool.connect();
+//         client.release();
+//         console.log("Connected to database");
+//         resolve();
+//     } catch (error) {
+//         console.error("Failed to connect to database:", error);
+//         reject(error);
+//     }
+// });
 //# sourceMappingURL=db.js.map
