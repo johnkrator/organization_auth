@@ -170,6 +170,14 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch: `git push origin my-feature-branch`.
 5. Submit a pull request.
 
+## Deployment URL
+
+https://organization-authentication.vercel.app/
+
+## Postman Documentation
+
+https://documenter.getpostman.com/view/18462993/2sA3e1Bq4Q
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
